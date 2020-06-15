@@ -144,4 +144,8 @@ C:\Users\jenir\source\repos\API_dash\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAn
 C:\Users\jenir\source\repos\API_dash\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\jenir\source\repos\API_dash\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\jenir\source\repos\API_dash\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\jenir\source\repos\API_dash\obj\Debug\netcoreapp3.1\API_dash.genruntimeconfig.cache
+C:\Users\jenir\source\repos\API_dash\bin\Debug\netcoreapp3.1\Microsoft.Extensions.PlatformAbstractions.dll
+C:\Users\jenir\source\repos\API_dash\bin\Debug\netcoreapp3.1\Nancy.dll
+C:\Users\jenir\source\repos\API_dash\obj\Debug\netcoreapp3.1\API_dash.csproj.CoreCompileInputs.cache
 C:\Users\jenir\source\repos\API_dash\obj\Debug\netcoreapp3.1\API_dash.MvcApplicationPartsAssemblyInfo.cache
