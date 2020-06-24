@@ -1,5 +1,7 @@
 ﻿using API_dash.CustomExeptions;
 using API_dash.Models;
+using API_dash.UtilityClasses;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -79,11 +81,15 @@ namespace API_dash.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+           
+            
+            
             if (!_context.User.Any(u => u.Email == user.Email))
             {
                 // No users exist with that e-mail, so create a new user
                 _context.User.Add(user);
                 await _context.SaveChangesAsync();
+                user.Password = SecurityUtils.HashFunction(user.Password);
                 return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
             }
             else
@@ -116,22 +122,6 @@ namespace API_dash.Controllers
             return _context.User.Any(e => e.Id == id);
         }
 
-        private async void ValidateEmail(User user)
-        {
-            // Store in DB
-            // If duplicate throw new DuplicateAccountException()
-            if (!_context.User.Any(u => u.Email == user.Email))
-            {
-                // No users exist with that e-mail, so create a new user
-                _context.User.Add(user);
-                await _context.SaveChangesAsync();
-                //return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
-            }
-            else
-            {
-                // A user with that e-mail already exists, handle accordingly
-                throw new DuplicateAccountException();
-            }
-        }
+
     }
 }
