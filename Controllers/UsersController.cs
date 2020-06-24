@@ -1,6 +1,7 @@
 ﻿using API_dash.CustomExeptions;
 using API_dash.Models;
 using API_dash.UtilityClasses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,8 +12,11 @@ using System.Threading.Tasks;
 
 namespace API_dash.Controllers
 {
-    [Route("api/[controller]")]
+ 
+
     [ApiController]
+    [Authorize]
+    [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
         private readonly UserContext _context;
