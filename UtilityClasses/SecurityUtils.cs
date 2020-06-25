@@ -15,14 +15,14 @@ public class SecurityUtils
 
 
         
-public static String HashFunction(String password) {
+public static string HashFunction(string password) {
 
 
             byte[] salt = new byte[128 / 8];
-            using (var rng = RandomNumberGenerator.Create())
+            /*using (var rng = RandomNumberGenerator.Create())
             {
                 rng.GetBytes(salt);
-            }
+            }*/
 
             // derive a 256-bit subkey (use HMACSHA1 with 10,000 iterations)
             string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(

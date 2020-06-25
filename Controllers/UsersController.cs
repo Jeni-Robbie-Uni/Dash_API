@@ -15,7 +15,6 @@ namespace API_dash.Controllers
  
 
     [ApiController]
-    [Authorize]
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
@@ -33,7 +32,8 @@ namespace API_dash.Controllers
             return await _context.User.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/Users/
+
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(long id)
         {
@@ -91,9 +91,12 @@ namespace API_dash.Controllers
             if (!_context.User.Any(u => u.Email == user.Email))
             {
                 // No users exist with that e-mail, so create a new user
+
+                user.Password = SecurityUtils.HashFunction(user.Password);
                 _context.User.Add(user);
                 await _context.SaveChangesAsync();
-                user.Password = SecurityUtils.HashFunction(user.Password);
+                
+              
                 return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
             }
             else
