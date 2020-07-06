@@ -21,7 +21,7 @@ namespace API_dash.Models
         public string Email { get; set; }
 
         [Required]
-        [RegularExpression (@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{5,14}", ErrorMessage="Does not meet password Criteria")]
+        [RegularExpression (@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!#%*?&])[A-Za-z\d$@$!#%*?&]{5,14}", ErrorMessage="Does not meet password Criteria")]
         public string Password { get; set; }
 
     }

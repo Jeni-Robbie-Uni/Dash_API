@@ -29,7 +29,7 @@ namespace API_dash.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult<string> GetRandomToken([FromBody] UserDTO content)
         {
 
@@ -45,7 +45,7 @@ namespace API_dash.Controllers
                 return token;
             }
 
-            return StatusCode(419); //change error code
+            return StatusCode(401);
         }
     }
 }
