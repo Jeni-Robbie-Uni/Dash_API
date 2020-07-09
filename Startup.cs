@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using API_dash.Models;
 using Microsoft.EntityFrameworkCore;
+using API_dash.Middleware;
 
 namespace API_dash
 {
@@ -24,6 +25,7 @@ namespace API_dash
             services.AddDbContext<UserContext>(opt =>
                 opt.UseSqlServer(potato));
             services.AddControllers();
+            services.AddTokenAuthentication(Configuration);
         }
 
 
@@ -47,6 +49,8 @@ namespace API_dash
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
