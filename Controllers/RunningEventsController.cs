@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using API_dash.Models;
 using System.Globalization;
+using Microsoft.EntityFrameworkCore;
+using API_dash.UtilityClasses;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,24 +16,68 @@ namespace API_dash.Controllers
     [ApiController]
     public class RunningEventsController : ControllerBase
     {
-        // GET: api/<RunningEventsController>
+
+        private readonly UserContext _context;
+
+
+
+        public RunningEventsController(UserContext context)
+        {
+            _context = context;
+        }
+
+        // GET: api/RunningEvent
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ActionResult<IEnumerable<RunningEvent>>> GetRunningEvent()
         {
-            return new string[] { "value1", "value2","value3", "value4", "value5", "value6", "value7", "value8" };
+            return await _context.RunningEvent.ToListAsync();
         }
 
-        // GET api/<RunningEventsController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        // GET: api/RunningEvents
+        [HttpGet("{longitudeUser}/{latitudeUser}")]
+        public List<EventDTO> GetRunningEvent(float longitudeUser, float latitudeUser)
         {
-            return "value";
+            List<RunningEvent> listRunningEvent =  _context.RunningEvent.ToList();
+            List<EventDTO> simpleList= new List<EventDTO>();
+
+            foreach (RunningEvent runEvent in listRunningEvent)
+            {
+                var simp = new EventDTO
+                {
+                    City = runEvent.City,
+                    Date = runEvent.date,
+                    URL = runEvent.URL,
+                    Name = runEvent.Name,
+                    Distance = GeoLocationService.CalculatePointDistance(runEvent.longitude, longitudeUser, runEvent.latitude, latitudeUser)
+                };
+
+
+                simpleList.Add(simp);
+            }
+
+            List<EventDTO> list = simpleList.OrderBy(x => x.Distance).ToList();
+            return list.Take(10).ToList();
         }
 
-        // POST api/<RunningEventsController>
+
+
+
+
+
+
         [HttpPost]
-        public void Post([FromBody] int id, [FromBody] string name, string location, string city, string postcode, DateTime dateTime, float distance, bool virtualRace)
+        public async Task<ActionResult<RunningEvent>> PostUser(RunningEvent x)
         {
+
+
+
+                _context.RunningEvent.Add(x);
+                await _context.SaveChangesAsync();
+
+
+                return StatusCode(200);
+
+
         }
 
         // PUT api/<RunningEventsController>/5

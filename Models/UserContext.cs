@@ -14,5 +14,6 @@ namespace API_dash.Models
         }
 
         public DbSet<User> User { get; set; }
+        public DbSet<RunningEvent> RunningEvent { get; set; }
     }
 }

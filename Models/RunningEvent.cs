@@ -24,13 +24,12 @@ namespace API_dash.Models
         [Required]
         public string City { get; set; }
             
-        [Required]
+
         public string Postcode { get; set; }
         [Required]
         public string Country { get; set; }
 
-        [Required]
-        public List<string> Distance { get; set; }
+
 
         [Required]
         public DateTime date { get; set; }
