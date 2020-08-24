@@ -8,7 +8,7 @@ namespace API_dash.UtilityClasses
 {
     public class GeoLocationService
     {
-        public static double CalculatePointDistance(float longitudeEvent, float longitudeUser, float latitudeEvent, float latitudeUser)
+        public static int CalculatePointDistance(float longitudeEvent, float longitudeUser, float latitudeEvent, float latitudeUser)
         {
           
             const double earthRadius = 6376500.0;
@@ -23,7 +23,7 @@ namespace API_dash.UtilityClasses
            
             var raw = Math.Pow(Math.Sin((lat2 - lat1) / 2.0), 2.0) + Math.Cos(lat1) * Math.Cos(lat2) * Math.Pow(Math.Sin(longDiff / 2.0), 2.0);
             double calcDistance = earthRadius * (2.0 * Math.Atan2(Math.Sqrt(raw), Math.Sqrt(1.0 - raw)));
-            return calcDistance;
+            return Convert.ToInt32(calcDistance);
         }
 
     }

@@ -34,6 +34,7 @@ namespace API_dash.Controllers
         }
 
         // GET: api/RunningEvents
+
         [HttpGet("{longitudeUser}/{latitudeUser}")]
         public List<EventDTO> GetRunningEvent(float longitudeUser, float latitudeUser)
         {
@@ -45,7 +46,7 @@ namespace API_dash.Controllers
                 var simp = new EventDTO
                 {
                     City = runEvent.City,
-                    Date = runEvent.date,
+                    Date = runEvent.date.ToShortDateString(),
                     URL = runEvent.URL,
                     Name = runEvent.Name,
                     Distance = GeoLocationService.CalculatePointDistance(runEvent.longitude, longitudeUser, runEvent.latitude, latitudeUser)

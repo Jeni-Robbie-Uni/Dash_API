@@ -20,10 +20,10 @@ namespace API_dash.Models
 
         public string City { get; set; }
 
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
 
 
-        public double Distance { get; set; }
+        public int Distance { get; set; }
 
 
 
